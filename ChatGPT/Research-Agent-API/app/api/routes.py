@@ -26,12 +26,33 @@ def analyze(req: AnalyzeRequest):
     )
 
 
+# class AgentRequest(BaseModel):
+#     text: str
+
+# @router.post("/agent")
+# def agent_route(req: AgentRequest):
+#     try:
+#         return agent.run_once(req.text)
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=str(e))
+
+
 class AgentRequest(BaseModel):
     text: str
 
+
 @router.post("/agent")
-def agent_route(req: AgentRequest):
+def run_agent(req: AgentRequest):
+
     try:
-        return agent.run_once(req.text)
+        return agent.run(req.text)
+
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        import traceback
+
+        traceback.print_exc()
+
+        raise HTTPException(
+            status_code=500,
+            detail=str(e)
+        )
