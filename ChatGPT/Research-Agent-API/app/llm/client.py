@@ -1,63 +1,33 @@
-# app/llm/client.py
-
 import json
-
+from tenacity import retry, stop_after_attempt, wait_fixed
 from google import genai
-from google.genai import types
 
 from app.core.config import settings
 from app.core.logger import logger
-from app.tools.registry import registry
+from app.llm.prompts import SYSTEM_PROMPT
+from app.schemas.analysis import AnalysisResponse
 
 client = genai.Client(api_key=settings.GEMINI_API_KEY)
 
 
 class LLMClient:
-
-    def decide(self, user_input: str):
-
-        logger.info("Gemini deciding next action")
-
-        tools = []
-
-        for tool in registry.tools.values():
-            schema = tool.schema()
-
-            tools.append(
-                types.FunctionDeclaration(
-                    name=schema["name"],
-                    description=schema["description"],
-                    parameters=schema["parameters"]
-                )
-            )
+    @retry(stop=stop_after_attempt(3), wait=wait_fixed(1))
+    def analyze(self, text: str) -> AnalysisResponse:
+        logger.info("Sending structured analysis request to Gemini")
 
         response = client.models.generate_content(
             model=settings.MODEL,
-            contents=user_input,
-            config=types.GenerateContentConfig(
-                system_instruction=(
-                    "You are an AI agent. "
-                    "Use tools when necessary."
-                ),
-                tools=[types.Tool(function_declarations=tools)],
-                temperature=0
-            )
+            contents=text,
+            config={
+                "system_instruction": SYSTEM_PROMPT,
+                "response_format": {
+                    "text": {
+                        "mime_type": "application/json",
+                        "schema": AnalysisResponse.model_json_schema(),
+                    }
+                },
+            },
         )
 
-        candidate = response.candidates[0]
-        content = candidate.content.parts[0]
-
-        # TOOL CALL
-        if hasattr(content, "function_call") and content.function_call:
-
-            return {
-                "type": "tool_call",
-                "tool": content.function_call.name,
-                "args": dict(content.function_call.args)
-            }
-
-        # FINAL RESPONSE
-        return {
-            "type": "final",
-            "content": content.text
-        }
+        logger.info("Raw Gemini output: %s", response.text)
+        return AnalysisResponse.model_validate_json(response.text)
