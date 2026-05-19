@@ -1,4 +1,5 @@
 import json
+
 from tenacity import retry, stop_after_attempt, wait_fixed
 from google import genai
 
@@ -11,23 +12,34 @@ client = genai.Client(api_key=settings.GEMINI_API_KEY)
 
 
 class LLMClient:
+
     @retry(stop=stop_after_attempt(3), wait=wait_fixed(1))
     def analyze(self, text: str) -> AnalysisResponse:
+
         logger.info("Sending structured analysis request to Gemini")
 
         response = client.models.generate_content(
             model=settings.MODEL,
-            contents=text,
-            config={
-                "system_instruction": SYSTEM_PROMPT,
-                "response_format": {
-                    "text": {
-                        "mime_type": "application/json",
-                        "schema": AnalysisResponse.model_json_schema(),
-                    }
-                },
-            },
+            contents=f"""
+            {SYSTEM_PROMPT}
+
+            Analyze this text:
+
+            {text}
+            """
         )
 
-        logger.info("Raw Gemini output: %s", response.text)
-        return AnalysisResponse.model_validate_json(response.text)
+        raw = response.text.strip()
+
+        logger.info(f"RAW RESPONSE:\n{raw}")
+
+        # Remove markdown wrappers if present
+        raw = raw.replace("```json", "").replace("```", "").strip()
+
+        parsed = json.loads(raw)
+
+        # Normalize sentiment
+        if "sentiment" in parsed:
+            parsed["sentiment"] = parsed["sentiment"].lower()
+
+        return AnalysisResponse(**parsed)

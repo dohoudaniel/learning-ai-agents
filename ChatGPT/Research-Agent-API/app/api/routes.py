@@ -15,5 +15,10 @@ class AnalyzeRequest(BaseModel):
 def analyze(req: AnalyzeRequest):
     try:
         return llm.analyze(req.text)
-    except Exception:
-        raise HTTPException(status_code=500, detail="Failed to process request")
+    except Exception as e:
+        print(e)
+
+        raise HTTPException(
+            status_code=500,
+            detail=str(e)
+    )
