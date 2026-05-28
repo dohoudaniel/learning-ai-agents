@@ -1,0 +1,200 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.w{display:grid;grid-template-columns:176px 1fr;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;font-family:var(--font-sans);min-height:500px}
+.sb{background:var(--color-background-secondary);border-right:0.5px solid var(--color-border-tertiary);padding:12px 0;display:flex;flex-direction:column}
+.sbt{font-size:11px;font-weight:500;color:var(--color-text-tertiary);padding:0 14px 10px;text-transform:uppercase;letter-spacing:.05em}
+.ni{display:flex;align-items:center;gap:8px;padding:8px 14px;font-size:13px;cursor:pointer;color:var(--color-text-secondary);border-left:2px solid transparent;transition:background .1s,color .1s;user-select:none}
+.ni:hover{background:var(--color-background-primary);color:var(--color-text-primary)}
+.ni.on{background:var(--color-background-primary);color:var(--color-text-primary);border-left-color:var(--color-text-primary);font-weight:500}
+.ni.dn .ic{color:var(--color-text-success)}
+.ic{font-size:11px;color:var(--color-text-tertiary);min-width:16px}
+.mc{display:flex;flex-direction:column;min-height:500px}
+.bd{padding:22px 26px;flex:1;overflow-y:auto;max-height:500px}
+.ft{padding:11px 18px;border-top:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--color-background-primary)}
+h1{font-size:18px;font-weight:500;margin-bottom:4px}
+h2{font-size:14px;font-weight:500;margin:16px 0 8px;color:var(--color-text-primary)}
+.tag{font-size:11px;padding:2px 8px;border-radius:4px;font-weight:500;display:inline-block;margin-bottom:14px}
+.tc{background:var(--color-background-info);color:var(--color-text-info)}
+.tg{background:var(--color-background-success);color:var(--color-text-success)}
+p{font-size:13px;line-height:1.75;color:var(--color-text-secondary);margin-bottom:8px}
+p b{color:var(--color-text-primary);font-weight:500}
+.cb{background:var(--color-background-secondary);border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:12px 14px;font-size:13px;color:var(--color-text-secondary);line-height:1.6;margin:10px 0}
+.cb b{color:var(--color-text-primary)}
+.cd{background:var(--color-background-tertiary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:12px 14px;font-family:var(--font-mono);font-size:11px;line-height:1.7;overflow-x:auto;white-space:pre;margin:10px 0;color:var(--color-text-secondary)}
+.k{color:var(--color-text-info)}.c{color:var(--color-text-tertiary)}.s{color:var(--color-text-success)}.f{color:var(--color-text-warning)}
+.ps{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.p{padding:5px 12px;border:0.5px solid var(--color-border-secondary);border-radius:20px;font-size:12px;color:var(--color-text-secondary);cursor:pointer;transition:all .1s;user-select:none}
+.p:hover,.p.on{background:var(--color-background-info);border-color:var(--color-border-info);color:var(--color-text-info)}
+.dt{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:12px 14px;font-size:13px;color:var(--color-text-secondary);min-height:48px;line-height:1.6;margin-top:8px}
+.dt b{color:var(--color-text-primary)}
+.ls{display:flex;align-items:center;gap:3px;flex-wrap:wrap;margin:12px 0}
+.ls .st{flex:1;min-width:76px;text-align:center;padding:8px 4px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);font-size:11.5px;font-weight:500;cursor:pointer;background:var(--color-background-primary);color:var(--color-text-secondary);transition:all .1s;user-select:none}
+.ls .st:hover,.ls .st.on{background:var(--color-background-info);border-color:var(--color-border-info);color:var(--color-text-info)}
+.ls .ar{color:var(--color-text-tertiary);font-size:13px}
+.mg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+.mc2{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:11px 13px}
+.mc2 .mt{font-size:13px;font-weight:500;margin-bottom:3px}
+.mc2 .mb{font-size:12px;color:var(--color-text-secondary);line-height:1.55}
+.btn{padding:6px 14px;font-size:12px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);cursor:pointer;background:var(--color-background-primary);color:var(--color-text-secondary);font-family:var(--font-sans);transition:all .1s}
+.btn:hover{background:var(--color-background-secondary)}
+.btn.pr{background:var(--color-text-primary);color:var(--color-background-primary);border-color:var(--color-text-primary)}
+.btn.pr:hover{opacity:.82}
+.pb{height:3px;background:var(--color-border-tertiary);border-radius:2px;margin-bottom:14px;overflow:hidden}
+.pf{height:100%;background:var(--color-text-primary);border-radius:2px;transition:width .3s}
+</style>
+<h2 class="sr-only">AI Agent interactive course — 6 lessons covering concept, the loop, tools, memory, planning, and building a complete agent.</h2>
+<div class="w">
+  <div class="sb">
+    <div class="sbt">Course</div>
+    <div id="NV"></div>
+  </div>
+  <div class="mc">
+    <div class="bd" id="BD"></div>
+    <div class="ft">
+      <button class="btn" id="PB" onclick="prev()">← Back</button>
+      <span id="PL" style="font-size:12px;color:var(--color-text-tertiary)"></span>
+      <button class="btn pr" id="NB" onclick="nxt()">Next →</button>
+    </div>
+  </div>
+</div>
+<script>
+var c=0;
+var SD=["<strong>Perceive:</strong> The agent receives the user's goal. It becomes the first entry in the growing message history. Everything the agent knows lives here.","<strong>Reason:</strong> The LLM reads the full history — goal, past tool results, injected memories — and decides: call a tool, or produce a final answer?","<strong>Act:</strong> Your code runs the tool the LLM requested. The LLM never executes code directly. Your infrastructure is the muscle; the LLM is the brain.","<strong>Observe:</strong> The tool's return value is appended to message history as a tool_result. The LLM now sees what happened — success, error, or partial data.","<strong>Decide:</strong> The LLM re-reads the updated history. Enough info? → end_turn. Need more? → pick another tool and loop again."];
+var RD=["<strong>Infinite loops:</strong> The LLM keeps calling tools without ever reaching end_turn. Always set a hard ceiling: <code>if steps > MAX_STEPS: raise RuntimeError()</code>. Non-negotiable.","<strong>Token overflow:</strong> After many iterations the message history fills the context window. Build a summarizer: compress old turns once history exceeds ~75% of the window.","<strong>Hallucinated tools:</strong> The LLM invents tool names or passes arguments in the wrong format. Validate every tool call against your schema before executing."];
+var TD=["<strong>Retrieval tools</strong> fetch information — web_search, read_file, query_db. They return data for the LLM to reason about. Keep return values concise; large results consume context fast.","<strong>Action tools</strong> have real-world side effects — send_email, create_record, write_file. These are dangerous. Log every call. Validate before executing. Add <code>dry_run=True</code> for testing.","<strong>Computation tools</strong> do precise work the LLM can't do reliably — math, code execution, data parsing. A sandboxed Python executor is one of the most powerful tools you can give an agent.","<strong>Sub-agent tools</strong> let one agent delegate to a specialist. Only reach for this when a single agent genuinely can't handle the parallelism or specialization needed."];
+var PD=["<strong>ReAct (Reason + Act):</strong> At each step the LLM emits a Thought before taking an Action. Simple, effective, slightly greedy — can't see more than one step ahead. The best starting default.","<strong>Plan-then-Execute:</strong> The agent generates a complete numbered plan first, then executes each step. Better when the task's full structure can be anticipated. Plans can be revised mid-execution.","<strong>Reflection:</strong> After producing an answer, the agent critiques its own output and refines it. Doubles token usage but dramatically improves accuracy for high-stakes tasks."];
+var MS=[
+{sh:"Concept",ti:"What Is an AI Agent?",r:function(){return`<h1>What Is an AI Agent?</h1><span class="tag tc">Lesson 1 of 6</span><div class="pb"><div class="pf" style="width:16%"></div></div><p>Before writing a single line of code, lock in the right mental model. Most developers think of an LLM as a function — <b>input goes in, text comes out</b>. That is a chatbot.</p><p>An agent is different. It is a <b>system</b> where the LLM reasons, decides on an action, executes it, observes the result, and reasons again — looping until the goal is achieved.</p><h2>One sentence you must memorize</h2><div class="cb"><b>An AI Agent is an LLM in a loop that can take actions in the world.</b><br>Everything else — tools, memory, planning — is infrastructure to make that loop smarter and more capable.</div><h2>Chatbot vs Agent</h2><div class="ps"><div class="p on" id="c1" onclick="cmp('bot')">Chatbot</div><div class="p" id="c2" onclick="cmp('agt')">Agent</div></div><div class="dt" id="CD"><b>Chatbot:</b> User sends a message → LLM generates one response → done. Stateless, single-shot, no external actions. It can only talk, never act.</div><h2>The key insight</h2><p>An agent's output is not just words — it can be <b>actions</b>: calling APIs, querying databases, running code, writing files. The LLM decides which action and when. Your code executes it.</p><div class="cb">🔑 <b>Your backend skills are your advantage.</b> Building an agent is mostly systems engineering — tool design, state management, error handling, loop control. The LLM is one component, not the whole system.</div>`}},
+{sh:"The Loop",ti:"The Agent Loop",r:function(){return`<h1>The Agent Loop</h1><span class="tag tc">Lesson 2 of 6</span><div class="pb"><div class="pf" style="width:33%"></div></div><p>The loop is the soul of every agent. Click each stage to understand what happens there:</p><div class="ls"><div class="st on" id="L0" onclick="stp(0)">1. Perceive</div><div class="ar">→</div><div class="st" id="L1" onclick="stp(1)">2. Reason</div><div class="ar">→</div><div class="st" id="L2" onclick="stp(2)">3. Act</div><div class="ar">→</div><div class="st" id="L3" onclick="stp(3)">4. Observe</div><div class="ar">→</div><div class="st" id="L4" onclick="stp(4)">5. Decide</div></div><div class="dt" id="LD">${SD[0]}</div><h2>The loop in code</h2><div class="cd"><span class="k">while</span> steps &lt; MAX_STEPS:
+    response = llm.<span class="f">call</span>(messages, tools)
+
+    <span class="k">if</span> response.stop_reason == <span class="s">"end_turn"</span>:
+        <span class="k">return</span> response.text   <span class="c"># Agent is done</span>
+
+    <span class="k">if</span> response.stop_reason == <span class="s">"tool_use"</span>:
+        result = <span class="f">execute_tool</span>(response.tool_name, response.args)
+        messages.<span class="f">append</span>(tool_result(result))
+        <span class="c"># LLM will reason again with new info</span></div><h2>What breaks the loop?</h2><div class="ps"><div class="p on" id="R0" onclick="rsk(0)">Infinite loops</div><div class="p" id="R1" onclick="rsk(1)">Token overflow</div><div class="p" id="R2" onclick="rsk(2)">Hallucinated tools</div></div><div class="dt" id="RD">${RD[0]}</div>`}},
+{sh:"Tools",ti:"Tools",r:function(){return`<h1>Tools — How Agents Act</h1><span class="tag tc">Lesson 3 of 6</span><div class="pb"><div class="pf" style="width:50%"></div></div><p>A tool is a <b>Python function with a JSON schema</b>. You describe it to the LLM so it knows when and how to call it. The LLM emits a tool-call request. Your code runs the function and returns the result.</p><h2>Tool anatomy</h2><div class="cd">{
+  <span class="s">"name"</span>: <span class="s">"query_db"</span>,
+  <span class="s">"description"</span>: <span class="s">"Query the product database. Use when the user asks about inventory or pricing."</span>,
+  <span class="s">"input_schema"</span>: {
+    <span class="s">"type"</span>: <span class="s">"object"</span>,
+    <span class="s">"properties"</span>: {
+      <span class="s">"sql"</span>: { <span class="s">"type"</span>: <span class="s">"string"</span>, <span class="s">"description"</span>: <span class="s">"The SQL query to run"</span> }
+    },
+    <span class="s">"required"</span>: [<span class="s">"sql"</span>]
+  }
+}</div><h2>Tool categories</h2><div class="ps"><div class="p on" id="T0" onclick="tl(0)">Retrieval</div><div class="p" id="T1" onclick="tl(1)">Action</div><div class="p" id="T2" onclick="tl(2)">Computation</div><div class="p" id="T3" onclick="tl(3)">Sub-agent</div></div><div class="dt" id="TD">${TD[0]}</div><div class="cb" style="margin-top:12px"><b>The description is everything.</b> The LLM chooses when to call a tool based entirely on its description. Write it like documentation: when to use it, what it returns, and its limits.</div>`}},
+{sh:"Memory",ti:"Memory",r:function(){return`<h1>Memory — How Agents Remember</h1><span class="tag tc">Lesson 4 of 6</span><div class="pb"><div class="pf" style="width:66%"></div></div><p>An LLM has no memory between calls. Every call starts from zero. You need to build memory explicitly — and this is where your backend experience gives you a serious edge.</p><div class="mg"><div class="mc2"><div class="mt">In-context (short-term)</div><div class="mb">The growing message history in the current loop. Fast, zero overhead, but limited by the context window.</div></div><div class="mc2"><div class="mt">External (long-term)</div><div class="mb">Stored outside the LLM — Postgres, Redis. Survives sessions. Retrieved via tools or injected at call-time.</div></div><div class="mc2"><div class="mt">Vector / Semantic</div><div class="mb">Text embedded into vectors in pgvector or Qdrant. Queried by semantic similarity. The basis of RAG.</div></div><div class="mc2"><div class="mt">Structured / Key-value</div><div class="mb">Rows in Postgres or Redis. Exact lookup. For facts: user preferences, session state, last-seen events.</div></div></div><h2>Injecting memory</h2><div class="cd"><span class="c"># Before calling the LLM — inject relevant context</span>
+memories = vector_db.<span class="f">search</span>(user_message, top_k=5)
+session  = redis.<span class="f">get</span>(f<span class="s">"session:{user_id}"</span>)
+
+messages = [system_prompt, *memories, *session.history, user_msg]
+response = llm.<span class="f">call</span>(messages, tools)
+
+<span class="c"># After — store what was learned</span>
+vector_db.<span class="f">upsert</span>(<span class="f">embed</span>(str(response)))
+redis.<span class="f">append</span>(f<span class="s">"session:{user_id}"</span>, response)</div><div class="cb"><b>Context overflow kills agents in production.</b> After ~10 iterations the history approaches the window limit. Build a summarizer: compress old turns once history hits 75% of the window. This is not optional.</div>`}},
+{sh:"Planning",ti:"Planning",r:function(){return`<h1>Planning — How Agents Think Ahead</h1><span class="tag tc">Lesson 5 of 6</span><div class="pb"><div class="pf" style="width:83%"></div></div><p>A basic agent is greedy — it reasons one step at a time. For complex tasks it needs strategic foresight. Planning layers add that.</p><h2>Three patterns — click each</h2><div class="ps"><div class="p on" id="P0" onclick="pln(0)">ReAct</div><div class="p" id="P1" onclick="pln(1)">Plan-then-Execute</div><div class="p" id="P2" onclick="pln(2)">Reflection</div></div><div class="dt" id="PD">${PD[0]}</div><h2>Planning via system prompt</h2><div class="cd">SYSTEM = <span class="s">"""
+Before taking any action:
+1. Write your PLAN as a numbered list of steps
+2. Execute step 1 and observe the result
+3. Revise your plan if new info changes things
+4. Continue until the goal is fully achieved
+"""</span></div><div class="cb"><b>Honest warning:</b> Don't reach for multi-agent systems prematurely. Most real problems are solved by a well-designed single agent with good tools and memory. Multi-agent adds coordination complexity, latency, and new failure modes.</div>`}},
+{sh:"Build It",ti:"Complete Agent",r:function(){return`<h1>Build Your First Agent</h1><span class="tag tg">Lesson 6 of 6</span><div class="pb"><div class="pf" style="width:100%"></div></div><p>Every concept from this course lives in the code below. Read every single line — nothing here is decorative.</p><div class="cd"><span class="k">import</span> anthropic
+client = anthropic.Anthropic()
+MAX_STEPS = 10
+
+<span class="c"># 1. Tools — what the agent can do</span>
+<span class="k">def</span> <span class="f">search_web</span>(query: str) -> str:
+    <span class="k">return</span> f<span class="s">"[results: {query}]"</span>   <span class="c"># swap in a real search API</span>
+
+<span class="k">def</span> <span class="f">run_code</span>(code: str) -> str:
+    <span class="k">return</span> <span class="s">"output"</span>   <span class="c"># swap in a sandboxed executor</span>
+
+TOOLS = [
+  {<span class="s">"name"</span>:<span class="s">"search_web"</span>,<span class="s">"description"</span>:<span class="s">"Search the web for current info"</span>,
+   <span class="s">"input_schema"</span>:{<span class="s">"type"</span>:<span class="s">"object"</span>,<span class="s">"properties"</span>:{<span class="s">"query"</span>:{<span class="s">"type"</span>:<span class="s">"string"</span>}},<span class="s">"required"</span>:[<span class="s">"query"</span>]}},
+  {<span class="s">"name"</span>:<span class="s">"run_code"</span>,<span class="s">"description"</span>:<span class="s">"Execute Python, return output"</span>,
+   <span class="s">"input_schema"</span>:{<span class="s">"type"</span>:<span class="s">"object"</span>,<span class="s">"properties"</span>:{<span class="s">"code"</span>:{<span class="s">"type"</span>:<span class="s">"string"</span>}},<span class="s">"required"</span>:[<span class="s">"code"</span>]}},
+]
+TOOL_MAP = {<span class="s">"search_web"</span>: search_web, <span class="s">"run_code"</span>: run_code}
+
+<span class="c"># 2. The agent loop</span>
+<span class="k">def</span> <span class="f">run_agent</span>(goal: str) -> str:
+    messages = [{<span class="s">"role"</span>:<span class="s">"user"</span>,<span class="s">"content"</span>:goal}]
+    steps = 0
+
+    <span class="k">while</span> steps &lt; MAX_STEPS:
+        steps += 1
+        resp = client.messages.<span class="f">create</span>(
+            model=<span class="s">"claude-opus-4-5"</span>, max_tokens=2048,
+            system=<span class="s">"You are a research agent. Plan before acting."</span>,
+            tools=TOOLS, messages=messages
+        )
+        <span class="c"># Agent finished</span>
+        <span class="k">if</span> resp.stop_reason == <span class="s">"end_turn"</span>:
+            <span class="k">return</span> next(b.text <span class="k">for</span> b <span class="k">in</span> resp.content <span class="k">if</span> b.type==<span class="s">"text"</span>)
+
+        <span class="c"># Agent wants to call a tool</span>
+        <span class="k">if</span> resp.stop_reason == <span class="s">"tool_use"</span>:
+            messages.<span class="f">append</span>({<span class="s">"role"</span>:<span class="s">"assistant"</span>,<span class="s">"content"</span>:resp.content})
+            results = []
+            <span class="k">for</span> b <span class="k">in</span> resp.content:
+                <span class="k">if</span> b.type == <span class="s">"tool_use"</span>:
+                    fn = TOOL_MAP.<span class="f">get</span>(b.name)
+                    out = <span class="f">fn</span>(**b.input) <span class="k">if</span> fn <span class="k">else</span> f<span class="s">"Error: unknown tool {b.name}"</span>
+                    results.<span class="f">append</span>({<span class="s">"type"</span>:<span class="s">"tool_result"</span>,<span class="s">"tool_use_id"</span>:b.id,<span class="s">"content"</span>:out})
+            messages.<span class="f">append</span>({<span class="s">"role"</span>:<span class="s">"user"</span>,<span class="s">"content"</span>:results})
+
+    <span class="k">raise</span> <span class="f">RuntimeError</span>(<span class="s">f"Agent hit {MAX_STEPS} steps without finishing"</span>)
+
+<span class="f">print</span>(<span class="f">run_agent</span>(<span class="s">"Compare Django vs FastAPI for a high-throughput REST API."</span>))</div><button class="btn pr" style="width:100%;margin-top:10px" onclick="sendPrompt('I finished the AI Agent lesson. Give me a real, demanding project challenge — an agent with 3 or more useful tools, relevant to backend engineering. Be specific.')">I'm ready — give me a project challenge ↗</button>`}}
+];
+
+function render(){
+  var m=MS[c];
+  document.getElementById('BD').innerHTML=m.r();
+  document.getElementById('PL').textContent=(c+1)+' / '+MS.length;
+  document.getElementById('PB').disabled=c===0;
+  document.getElementById('NB').textContent=c===MS.length-1?'Finish':'Next →';
+  var h='';
+  for(var i=0;i<MS.length;i++){
+    h+='<div class="ni'+(i===c?' on':'')+(i<c?' dn':'')+'" onclick="go('+i+')">';
+    h+='<span class="ic">'+(i<c?'✓':(i+1))+'</span><span>'+MS[i].sh+'</span></div>';
+  }
+  document.getElementById('NV').innerHTML=h;
+}
+function go(i){c=i;render();}
+function prev(){if(c>0){c--;render();}}
+function nxt(){if(c<MS.length-1){c++;render();}}
+
+function cmp(t){
+  var a=document.getElementById('c1'),b=document.getElementById('c2'),d=document.getElementById('CD');
+  if(!a||!b||!d)return;
+  a.classList.toggle('on',t==='bot');b.classList.toggle('on',t==='agt');
+  d.innerHTML=t==='bot'
+    ?'<b>Chatbot:</b> User sends a message → LLM generates one response → done. Stateless, single-shot, no external actions. It can only talk, never act.'
+    :'<b>Agent:</b> User sends a goal → LLM reasons → calls tools → observes results → reasons again → ... → returns final answer when done. Stateful, multi-step, acts in the world.';
+}
+function stp(i){
+  for(var j=0;j<5;j++){var e=document.getElementById('L'+j);if(e)e.classList.toggle('on',j===i);}
+  var d=document.getElementById('LD');if(d)d.innerHTML=SD[i];
+}
+function rsk(i){
+  for(var j=0;j<3;j++){var e=document.getElementById('R'+j);if(e)e.classList.toggle('on',j===i);}
+  var d=document.getElementById('RD');if(d)d.innerHTML=RD[i];
+}
+function tl(i){
+  for(var j=0;j<4;j++){var e=document.getElementById('T'+j);if(e)e.classList.toggle('on',j===i);}
+  var d=document.getElementById('TD');if(d)d.innerHTML=TD[i];
+}
+function pln(i){
+  for(var j=0;j<3;j++){var e=document.getElementById('P'+j);if(e)e.classList.toggle('on',j===i);}
+  var d=document.getElementById('PD');if(d)d.innerHTML=PD[i];
+}
+render();
+</script>
